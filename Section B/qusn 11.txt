@@ -8,7 +8,7 @@ Promlem statement : 11
 Programming Approach
 --------------------
 
-1. Dyanamic programming
+1. Divide and conquer
 2. Recursion
 
 -----------
