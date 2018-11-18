@@ -1,70 +1,75 @@
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
-struct contestant
+int check(int c, int *arr, int beg, int end)
 {
-	int stime, btime, rtime, num;
-};
+    /*
+    Objective: the function checking whether 'c' is the majority element of all or not.
+    Input Variables:
+        c: variable returned from divideInput function
+        *arr: input array
+        beg: start of the array
+        end: end of the array
+    Return Value:
+        true, if c is the majority element
+        else, false
+    */
 
-void copy(contestant &c1, contestant &c2) //equating 1 element to another
-{
-	c1.num = c2.num;
-	c1.stime = c2.stime;
-	c1.btime = c2.btime;
-	c1.rtime = c2.rtime;
+    int cnt=0;
+
+    for(int i=beg; i<=end; i++)
+    {
+        if(arr[i]%5==c%5)   //checking the equivalence of element c with all other elements
+            cnt++;
+    }
+    if(cnt-1 > (beg+end)/2) //count -1 as, c itself is not included in this count, an element being equivalent to it own self
+        return 1;
+    else
+        return 0;
 }
 
-bool compare(contestant c1, contestant c2) //function compares the two on the basis of bike time + run time
+int divideInput(int *arr, int beg, int end)
 {
-	int s1  = c1.stime;
-	int br1 = c1.btime + c1.rtime;
-	int s2  = c2.stime;
-	int br2 = c2.btime + c2.rtime;
-	if(br1 < br2)
-		return true;
-	else
-		return false;
-}
+    /*
+    Objective: the function aims at dividing the input into equal halves and finding whether any two elements taken at a time are equivalent or not.
+    Input Variables:
+        *arr: input array
+        beg: start of the array
+        end: end of the array
+    Return Value:
+        c, that is the majority element(if any)
+        else, 0 symbolizing there isn't any majority element
+    */
+    int c, found, mid;
 
-void sort(contestant c[], int n)  //insertion sort
-{
+    if(beg==end)   //returning 0 since there is just 1 element in the set
+        return 0;
 
-	int i,j;
-	contestant con;
-	for(i=1; i<n; i++)
-	{
-		copy(con,c[i]); //to copy one element's data to a key
-		j=i-1;
-		while(j>=0 && compare(c[j],con))
-		{
-			copy(c[j+1],c[j]);
-			j=j-1;
-		}
-		copy(c[j+1], con);
-	}
-}
+    else if(beg+1==end)  //checking equivalence of two elements of a set
+    {
+        if(arr[beg]%5 == arr[end]%5)
+            return arr[beg];
+    }
 
-int main()
-{
-	int n;
-	while(true){
-		cout<<"\nEnter number of contestants: ";
-		cin>>n;
-		if(n>=1)
-			break;
-		cout<<"\nNumber of contestants should be at least 1\n";
-	}
-	contestant *c = new contestant[n];
-	for(int i=0;i<n;i++)
-	{
-		cout<<"\nEnter expected swimming time, biking time and running time of contestant "<<i+1<<": \n";
-		cin>>c[i].stime>>c[i].btime>>c[i].rtime;
-		c[i].num=i+1;
-	}
-	sort(c,n);
-	cout<<"\nOrder of sending out contestants is \n";
-	for(int j=0; j<n; j++)
-		cout<<c[j].num<<" ";
-	return 0;
+    mid=(beg+end)/2;  //diving the input into 2 equal halves
+    c=divideInput(arr,beg,mid);
+    if(c)
+    {
+        found=check(c,arr,beg,end);  //functions checks if the number found equal is equivalent to the majority of numbers in the set
+        if(found)
+            return c; //returning the majority element
+        else
+            return 0;
+    }
+    else
+    {
+        c=divideInput(arr,mid+1,end);
+        found=check(c,arr,beg,end);
+        if(found)
+            return c;
+        else
+            return 0;
+    }
+    return 0; //since no majority element is found returning 0
 }
