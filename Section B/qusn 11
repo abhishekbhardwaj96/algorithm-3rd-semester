@@ -76,5 +76,3 @@ int main()
 	cout<<"\n\nNo. of ways in which anti sqauds can be formed is : "<<anti_squad(no,no,min_in_group);
 	return 0;
 }
-qusn 11.cpp
-Displaying qusn 11.cpp.
