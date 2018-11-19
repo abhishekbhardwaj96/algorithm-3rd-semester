@@ -1,0 +1,114 @@
+MCA 301 : Design and analysis of Algorithms
+Assignment : 3
+Promlem statement : 9
+
+
+--------------------
+Programming Approach
+--------------------
+
+1. Iterative
+
+------------
+Explaination
+------------
+
+	Data structure
+	--------------
+
+	- contestant => {stime, btime,rtime,num}
+
+
+======================================================================================================================
+
+	-------------------------------
+	Function 1 : copy(contestant &c1, contestant &c2)
+	-------------------------------
+
+	**********
+	Pseudocode
+	**********
+
+	copy(contestant &c1, contestant &c2)  
+  	1.	copy of detail of contestant c2 to c1
+
+
+	Description
+	-----------
+	copy(contestant &c1, contestant &c2)
+    	/*
+    	Objective: the function aims at copying the values of one object of structure contestant to another object of the structure.
+    	Input Variables:
+        	c1: object c1
+        	c2: object c2
+    	Return Value: None
+    	*/
+======================================================================================================================
+	
+	----------------------------------
+	Function 2 : compare(contestant c1, contestant c2)
+	----------------------------------
+	
+	**********
+	Pseudocode
+	**********
+
+	compare(contestant c1, contestant c2):
+	1.	s1  = c1.stime;
+	2.	br1 = c1.btime + c1.rtime;
+	3.	s2  = c2.stime;
+	4.	br2 = c2.btime + c2.rtime;
+	5.	if   br1 < br2
+			return true;
+	6.	else
+			return false;
+
+	/*
+   	 Objective: the function aims at comparing the sum of running time and biking time of two objects of structure contestant.
+    	Input Variables:
+	        	c1: object c1
+        		c2: object c2
+    	Return Value:
+        		True if, c1 < c2
+        		else, False
+    	*/
+
+======================================================================================================================
+	
+	----------------------------------
+	Function 3 : compare(contestant c1, contestant c2)
+	----------------------------------
+	
+	**********
+	Pseudocode
+	**********
+
+	compare(contestant c1, contestant c2)
+	1.	for i=1 to n:
+	2.		copy(con,c[i])
+	3.		j=i-1;
+	4.		while   (j>=0 && compare(c[j],con))
+	5.			copy(c[j+1],c[j]);
+	6.			j=j-1;
+	7.		copy(c[j+1], con);
+
+ 	   /*
+   	  Objective: the function aims at sorting the input on the basis of decreasing running + biking time.
+    	  Input Variables:
+        	  c: array of objects
+        	  n: size of the c
+    	  Return Value: None
+    	  */
+
+======================================================================================================================
+
+	
+----------
+Complexity
+----------
+
+The simple solution of the problem is, send the contestants in decreasing order of the sum of projected biking and running time.
+
+Since, the solutions just adds the projected biking and running times, then sorts the total in decreasing order.
+
+The algorithm takes  T(n)=O(n2) time, as sorting is done using insertion sort.
